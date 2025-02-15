@@ -1,1 +1,6 @@
 /venv
+/timeline_output
+detected_activities
+detected_activities_no_transcript
+tools
+venv
