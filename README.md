@@ -59,8 +59,8 @@ You can install the package in several ways:
 ### From Source
 1. Clone the repository:
    ```bash
-   git clone https://github.com/gulliverhandley/recorded_call_analyser.git
-   cd recorded_call_analyser
+   git clone https://github.com/gulliverhan/videocallanalyser.git
+   cd videocallanalyser
    ```
 
 2. Install in development mode:
