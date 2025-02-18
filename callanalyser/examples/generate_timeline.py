@@ -6,11 +6,15 @@ import cv2
 import numpy as np
 from pathlib import Path
 import logging
-from callanalyser.video.activity_detector import ActivityDetector, ContentType, ActivityChange
+from callanalyser.video.activity_detector import ActivityDetector, ContentType, ActivityEvent
+from callanalyser.video.metric_analyzer import analyze_video_metrics
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
-from datetime import timedelta
 import sys
+import argparse
+import inquirer
+from typing import Optional, List
+import os
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -41,12 +45,67 @@ def normalize_timestamp(timestamp: float, last_timestamp: float, duration: float
             return timestamp + duration
     return timestamp
 
+def interactive_mode() -> dict:
+    """
+    Run interactive mode to get parameters from user.
+    
+    Returns:
+        dict: Parameters selected by user
+    """
+    questions = [
+        inquirer.Path('video_path',
+            message="Enter the path to your video file",
+            exists=True,
+            path_type=inquirer.Path.FILE),
+        inquirer.List('llm_enabled',
+            message="Would you like to use LLM verification?",
+            choices=['No', 'Yes'],
+            default='No'),
+        inquirer.List('llm_provider',
+            message="Select LLM provider",
+            choices=['anthropic', 'openai', 'azure', 'gemini'],
+            default='anthropic',
+            when=lambda answers: answers['llm_enabled'] == 'Yes'),
+        inquirer.Text('sample_interval',
+            message="Enter sample interval in seconds (default: 10.0)",
+            default="10.0",
+            validate=lambda _, x: float(x) > 0),
+        inquirer.Text('min_confidence',
+            message="Enter minimum confidence threshold (0.0-1.0, default: 0.3)",
+            default="0.3",
+            validate=lambda _, x: 0 <= float(x) <= 1),
+        inquirer.Text('min_duration',
+            message="Enter minimum segment duration in seconds (default: 2.0)",
+            default="2.0",
+            validate=lambda _, x: float(x) > 0),
+        inquirer.Path('output_dir',
+            message="Enter output directory (default: timeline_output)",
+            default="timeline_output",
+            exists=False,
+            path_type=inquirer.Path.DIRECTORY)
+    ]
+    
+    answers = inquirer.prompt(questions)
+    if not answers:
+        sys.exit(1)
+    
+    # Convert answers to appropriate types
+    return {
+        'video_path': answers['video_path'],
+        'use_llm': answers['llm_enabled'] == 'Yes',
+        'llm_provider': answers.get('llm_provider'),
+        'sample_interval': float(answers['sample_interval']),
+        'min_confidence': float(answers['min_confidence']),
+        'min_duration': float(answers['min_duration']),
+        'output_dir': answers['output_dir']
+    }
+
 def create_timeline(activities: list, duration: float, output_path: Path):
     """
     Create a visual timeline of the call activities.
     
     Args:
-        activities: List of detected activities
+        activities: List of ActivityEvent objects
         duration: Total duration of the video in seconds
         output_path: Path to save the timeline image
     """
@@ -55,11 +114,9 @@ def create_timeline(activities: list, duration: float, output_path: Path):
     
     # Define colors for different content types
     colors = {
-        ContentType.SPEAKER_VIEW: '#2ecc71',  # Green
-        ContentType.SCREEN_SHARE: '#3498db',  # Blue
-        ContentType.SLIDES: '#9b59b6',        # Purple
-        ContentType.WHITEBOARD: '#e74c3c',    # Red
-        ContentType.UNKNOWN: '#95a5a6'        # Gray
+        ContentType.SPEAKER: '#2ecc71',     # Green
+        ContentType.SLIDES: '#9b59b6',      # Purple
+        ContentType.INTERACTIVE: '#3498db',  # Blue
     }
     
     # Create main timeline axis
@@ -73,93 +130,40 @@ def create_timeline(activities: list, duration: float, output_path: Path):
     # Add grid for time markers
     ax.grid(True, axis='x', linestyle='--', alpha=0.3)
     
-    # Track content segments
-    current_content = ContentType.SPEAKER_VIEW
-    segment_start = 0
-    last_timestamp = 0
-    
-    # Filter out very short segments and fix overlapping times
-    filtered_activities = []
-    min_segment_duration = 0.5  # Minimum segment duration in seconds
-    
+    # Plot each activity segment
     for activity in activities:
-        # Normalize timestamp
-        normalized_time = normalize_timestamp(activity.timestamp, last_timestamp, duration)
+        # Skip invalid segments
+        if activity.start_time >= duration or activity.end_time is None:
+            continue
+            
+        # Ensure we don't exceed video duration
+        end_time = min(activity.end_time, duration)
+        width = end_time - activity.start_time
         
-        # Calculate segment duration
-        segment_duration = normalized_time - last_timestamp
+        if width <= 0:
+            continue
         
-        # Only include segments longer than minimum duration
-        if segment_duration >= min_segment_duration:
-            # Create new activity with normalized timestamp
-            filtered_activities.append(ActivityChange(
-                timestamp=normalized_time,
-                confidence=activity.confidence,
-                frame_before=activity.frame_before,
-                frame_after=activity.frame_after,
-                activity_type=activity.activity_type,
-                content_type=activity.content_type,
-                details=activity.details
-            ))
-            last_timestamp = normalized_time
-    
-    # Plot content segments
-    for i, activity in enumerate(filtered_activities):
-        if activity.activity_type == "content_change" or i == len(filtered_activities) - 1:
-            # Draw the segment up to this point
-            width = activity.timestamp - segment_start
-            
-            # Skip invalid segments
-            if width <= 0 or segment_start >= duration:
-                continue
-                
-            # Ensure we don't exceed video duration
-            if segment_start + width > duration:
-                width = duration - segment_start
-            
-            rect = patches.Rectangle(
-                (segment_start, 0), width, 1,
-                facecolor=colors[current_content],
-                alpha=0.5
-            )
-            ax.add_patch(rect)
-            
-            # Add label if segment is wide enough
-            if width > duration * 0.05:  # Only label segments wider than 5% of total duration
-                plt.text(
-                    segment_start + width/2,
-                    0.5,
-                    current_content.replace('_', ' ').title(),
-                    horizontalalignment='center',
-                    verticalalignment='center'
-                )
-            
-            # Start new segment
-            segment_start = activity.timestamp
-            current_content = activity.content_type
-    
-    # Draw final segment if needed
-    if segment_start < duration:
-        width = duration - segment_start
+        # Draw the segment
         rect = patches.Rectangle(
-            (segment_start, 0), width, 1,
-            facecolor=colors[current_content],
+            (activity.start_time, 0), width, 1,
+            facecolor=colors.get(activity.content_type, colors[ContentType.SLIDES]),
             alpha=0.5
         )
         ax.add_patch(rect)
-        if width > duration * 0.05:
+        
+        # Add label if segment is wide enough
+        if width > duration * 0.02:  # Only label segments wider than 2% of total duration
+            label = activity.content_type.replace('_', ' ').title()
+            if activity.content_type == ContentType.SLIDES and activity.slide_number is not None:
+                label = f"Slide {activity.slide_number}"
+            
             plt.text(
-                segment_start + width/2,
+                activity.start_time + width/2,
                 0.5,
-                current_content.replace('_', ' ').title(),
+                label,
                 horizontalalignment='center',
                 verticalalignment='center'
             )
-    
-    # Add activity markers
-    for activity in filtered_activities:
-        if activity.activity_type in ["speaker_change", "content_update"]:
-            plt.axvline(x=activity.timestamp, color='black', alpha=0.2, linewidth=1)
     
     # Customize x-axis
     plt.xlabel("Time (MM:SS)")
@@ -172,7 +176,7 @@ def create_timeline(activities: list, duration: float, output_path: Path):
     # Create legend
     legend_elements = [
         patches.Patch(facecolor=colors[ct], alpha=0.5, label=ct.replace('_', ' ').title())
-        for ct in colors if ct != ContentType.UNKNOWN
+        for ct in [ContentType.SPEAKER, ContentType.SLIDES, ContentType.INTERACTIVE]
     ]
     plt.legend(handles=legend_elements, loc='upper center', bbox_to_anchor=(0.5, -0.15),
               ncol=len(legend_elements), frameon=False)
@@ -182,78 +186,103 @@ def create_timeline(activities: list, duration: float, output_path: Path):
     plt.savefig(output_path, bbox_inches='tight', dpi=300)
     plt.close()
 
-def main():
-    # Get video path from command line argument
-    if len(sys.argv) != 2:
-        print("Usage: python generate_timeline.py <video_path>")
-        sys.exit(1)
-    
-    video_path = sys.argv[1]
-    video_name = Path(video_path).stem
-    
-    output_dir = Path("timeline_output")
-    output_dir.mkdir(exist_ok=True)
-    
-    # Initialize detector with adjusted parameters
-    detector = ActivityDetector(
-        min_change_threshold=10.0,
-        window_size=2,
-        low_res_width=320,
-        low_res_height=180
-    )
-    
-    logger.info(f"Analyzing video {video_name}...")
-    
-    # Get video duration
-    cap = cv2.VideoCapture(video_path)
-    duration = cap.get(cv2.CAP_PROP_FRAME_COUNT) / cap.get(cv2.CAP_PROP_FPS)
-    cap.release()
-    
-    # Collect activities
-    activities = list(detector.detect_activities(video_path, min_confidence=0.3))
-    
-    # Generate timeline with unique filename
-    timeline_path = output_dir / f"timeline_{video_name}.png"
-    create_timeline(activities, duration, timeline_path)
-    
-    logger.info(f"Timeline generated and saved to {timeline_path}")
-    
-    # Generate text summary with unique filename
-    summary_path = output_dir / f"summary_{video_name}.txt"
+def create_summary(video_name: str, activities: List[ActivityEvent], summary_path: str):
+    """Create a text summary of the activities."""
     with open(summary_path, "w") as f:
         f.write(f"Call Timeline Summary - {video_name}\n")
         f.write("=" * (22 + len(video_name)) + "\n\n")
         
-        current_content = ContentType.SPEAKER_VIEW
-        segment_start = 0
-        last_timestamp = 0
-        
         for activity in activities:
-            # Normalize timestamp
-            normalized_time = normalize_timestamp(activity.timestamp, last_timestamp, duration)
+            # Format timestamps as MM:SS
+            start_time = format_timestamp(activity.start_time)
+            end_time = format_timestamp(activity.end_time) if activity.end_time else "END"
+            duration = activity.end_time - activity.start_time if activity.end_time else 0
             
-            if activity.activity_type == "content_change":
-                # Calculate segment duration
-                segment_duration = normalized_time - segment_start
-                
-                # Only write segments longer than 0.5 seconds
-                if segment_duration >= 0.5:
-                    f.write(f"{format_timestamp(segment_start)} - {format_timestamp(normalized_time)}: "
-                           f"{current_content.replace('_', ' ').title()} ({segment_duration:.1f}s)\n")
-                    
-                    # Update for next segment
-                    segment_start = normalized_time
-                    current_content = activity.content_type
-                    last_timestamp = normalized_time
-        
-        # Write final segment if needed
-        if segment_start < duration:
-            final_duration = duration - segment_start
-            if final_duration > 0:
-                f.write(f"{format_timestamp(segment_start)} - {format_timestamp(duration)}: "
-                       f"{current_content.replace('_', ' ').title()} ({final_duration:.1f}s)\n")
+            # Add slide number to description if available
+            description = activity.content_type.replace('_', ' ').title()
+            if activity.content_type == ContentType.SLIDES:
+                if activity.slide_number is not None:
+                    description = f"Slide {int(activity.slide_number)}"
+                else:
+                    description = "Slides"  # Default to "Slides" if no number available
+            
+            f.write(f"{start_time} - {end_time}: {description} "
+                   f"({duration:.1f}s, confidence: {activity.confidence:.2f})\n")
+            
+            # Add key metrics
+            f.write("  Key metrics:\n")
+            for metric, value in activity.metrics.items():
+                if metric == 'frame':  # Skip the frame data
+                    continue
+                # Convert numpy values to Python float
+                if hasattr(value, 'dtype'):  # Check if it's a numpy type
+                    value = float(value)
+                if metric == 'slide_number' and value is not None:
+                    value = int(value)  # Ensure slide numbers are integers
+                try:
+                    f.write(f"    {metric}: {value:.3f}\n")
+                except (TypeError, ValueError):
+                    # For non-numeric values, just print as is
+                    f.write(f"    {metric}: {value}\n")
+            f.write("\n")
     
-    logger.info(f"Summary saved to {summary_path}")
+    logging.info(f"Summary saved to {summary_path}")
+
+def main():
+    """Main entry point."""
+    parser = argparse.ArgumentParser(description='Generate activity timeline from video')
+    parser.add_argument('video_path', help='Path to video file')
+    parser.add_argument('--sample-interval', type=float, default=1.0,
+                      help='Time interval between frame samples in seconds')
+    parser.add_argument('--min-confidence', type=float, default=0.3,
+                      help='Minimum confidence threshold for activity detection')
+    parser.add_argument('--use-llm', action='store_true',
+                      help='Use LLM for content verification')
+    parser.add_argument('--llm-provider', choices=['openai', 'anthropic'], default='anthropic',
+                      help='LLM provider to use for verification')
+    args = parser.parse_args()
+
+    # Convert video path to absolute path
+    video_path = os.path.abspath(args.video_path)
+    if not os.path.exists(video_path):
+        print(f"Error: Video file not found: {video_path}")
+        sys.exit(1)
+
+    # Create output directory if needed
+    os.makedirs('timeline_output', exist_ok=True)
+
+    # Get video filename without extension
+    video_name = os.path.splitext(os.path.basename(video_path))[0]
+
+    # Setup paths
+    timeline_path = f'timeline_output/timeline_{video_name}.png'
+    summary_path = f'timeline_output/summary_{video_name}.txt'
+
+    # Initialize detector
+    detector = ActivityDetector(
+        use_llm=args.use_llm,
+        llm_provider=args.llm_provider
+    )
+
+    # Detect activities
+    logging.info(f"Analyzing video {os.path.basename(video_path)}...")
+    logging.info(f"LLM verification: {'enabled' if args.use_llm else 'disabled'}")
+
+    activities = detector.detect_activities(video_path, sample_interval=args.sample_interval)
+
+    # Filter activities by confidence
+    activities = [a for a in activities if a.confidence >= args.min_confidence]
+
+    # Get video duration
+    cap = cv2.VideoCapture(video_path)
+    duration = cap.get(cv2.CAP_PROP_FRAME_COUNT) / cap.get(cv2.CAP_PROP_FPS)
+    cap.release()
+
+    # Create timeline visualization
+    create_timeline(activities, duration, timeline_path)
+
+    # Generate text summary
+    create_summary(video_name, activities, summary_path)
 
 if __name__ == "__main__":
     main() 

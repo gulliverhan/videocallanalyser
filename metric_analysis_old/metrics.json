@@ -1,0 +1,756 @@
+{
+  "test_call/call_activity_types.mp4": {
+    "metrics": [
+      {
+        "time": 0.0,
+        "metrics": {
+          "brightness": 0.0,
+          "brightness_variation": 0.0,
+          "is_transition": "True",
+          "edge_density": 0.0,
+          "center_brightness": 0.0,
+          "center_variation": 0.0,
+          "text_line_density": 0.0,
+          "face_ratio": 0.0,
+          "face_count": 0,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 0.0,
+          "motion_std": 0.0,
+          "motion_max": 0.0
+        },
+        "ground_truth": "speaker view"
+      },
+      {
+        "time": 10.0,
+        "metrics": {
+          "brightness": 86.21841531287605,
+          "brightness_variation": 46.45301205691561,
+          "is_transition": "False",
+          "edge_density": 0.008205945397111914,
+          "center_brightness": 115.86583558965103,
+          "center_variation": 49.257645056187904,
+          "text_line_density": 0.001438872593261131,
+          "face_ratio": 0.04517336040914561,
+          "face_count": 1,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 2.530107259750366,
+          "motion_std": 3.916933059692383,
+          "motion_max": 21.767627716064453
+        },
+        "ground_truth": "speaker view"
+      },
+      {
+        "time": 20.0,
+        "metrics": {
+          "brightness": 59.537261206377856,
+          "brightness_variation": 49.14302733253878,
+          "is_transition": "False",
+          "edge_density": 0.09288272788808664,
+          "center_brightness": 59.046453820697955,
+          "center_variation": 42.14330840092117,
+          "text_line_density": 0.0005673698856799037,
+          "face_ratio": 0.006325210589651023,
+          "face_count": 1,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 7.731955528259277,
+          "motion_std": 5.220872402191162,
+          "motion_max": 29.329792022705078
+        },
+        "ground_truth": "screen sharing"
+      },
+      {
+        "time": 30.0,
+        "metrics": {
+          "brightness": 35.9329149744284,
+          "brightness_variation": 70.15522973003647,
+          "is_transition": "False",
+          "edge_density": 0.03913065959687124,
+          "center_brightness": 3.318669148616125,
+          "center_variation": 18.683828514066228,
+          "text_line_density": 0.004191580174488568,
+          "face_ratio": 0.0,
+          "face_count": 0,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 7.733538627624512,
+          "motion_std": 5.417284965515137,
+          "motion_max": 21.693445205688477
+        },
+        "ground_truth": "screen sharing"
+      },
+      {
+        "time": 40.0,
+        "metrics": {
+          "brightness": 194.72444767223226,
+          "brightness_variation": 94.58314596725374,
+          "is_transition": "False",
+          "edge_density": 0.023689925541516246,
+          "center_brightness": 252.3994528429603,
+          "center_variation": 10.089959313968444,
+          "text_line_density": 0.0017759100481347773,
+          "face_ratio": 0.0,
+          "face_count": 0,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 9.756884574890137,
+          "motion_std": 13.32048225402832,
+          "motion_max": 87.40670776367188
+        },
+        "ground_truth": "screen sharing"
+      },
+      {
+        "time": 50.0,
+        "metrics": {
+          "brightness": 129.46311954723225,
+          "brightness_variation": 72.8657332934224,
+          "is_transition": "False",
+          "edge_density": 0.06450107175090253,
+          "center_brightness": 166.65828444645007,
+          "center_variation": 28.679570816616973,
+          "text_line_density": 0.009441749398315283,
+          "face_ratio": 0.0,
+          "face_count": 0,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 5.492447853088379,
+          "motion_std": 13.880853652954102,
+          "motion_max": 465.036865234375
+        },
+        "ground_truth": "screen sharing"
+      },
+      {
+        "time": 60.0,
+        "metrics": {
+          "brightness": 174.85317764741276,
+          "brightness_variation": 90.23194675936897,
+          "is_transition": "False",
+          "edge_density": 0.049474936070998794,
+          "center_brightness": 225.98703745487364,
+          "center_variation": 33.08981717605866,
+          "text_line_density": 0.004060431708784597,
+          "face_ratio": 0.0,
+          "face_count": 0,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 5.597179889678955,
+          "motion_std": 5.777299404144287,
+          "motion_max": 41.97670364379883
+        },
+        "ground_truth": "screen sharing"
+      },
+      {
+        "time": 70.0,
+        "metrics": {
+          "brightness": 143.72190602436822,
+          "brightness_variation": 95.06282972921858,
+          "is_transition": "False",
+          "edge_density": 0.04236706528279182,
+          "center_brightness": 167.23660311371842,
+          "center_variation": 83.65727622545312,
+          "text_line_density": 0.0035405385078219015,
+          "face_ratio": 0.0,
+          "face_count": 0,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 4.483625411987305,
+          "motion_std": 5.297918796539307,
+          "motion_max": 23.651512145996094
+        },
+        "ground_truth": "screen sharing"
+      },
+      {
+        "time": 80.0,
+        "metrics": {
+          "brightness": 87.25538742854994,
+          "brightness_variation": 46.70599680570021,
+          "is_transition": "False",
+          "edge_density": 0.006160217358604092,
+          "center_brightness": 115.07721307160048,
+          "center_variation": 51.460169685779576,
+          "text_line_density": 0.0012809303549939832,
+          "face_ratio": 0.04575812274368231,
+          "face_count": 1,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 7.191335201263428,
+          "motion_std": 5.370512962341309,
+          "motion_max": 46.99552536010742
+        },
+        "ground_truth": "speaker view"
+      },
+      {
+        "time": 90.0,
+        "metrics": {
+          "brightness": 89.18976289861612,
+          "brightness_variation": 47.2282812329403,
+          "is_transition": "False",
+          "edge_density": 0.008834893953068593,
+          "center_brightness": 122.22601722322503,
+          "center_variation": 47.915810970483314,
+          "text_line_density": 0.0014553249097472925,
+          "face_ratio": 0.04605191410950662,
+          "face_count": 1,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 2.0323681831359863,
+          "motion_std": 3.632033109664917,
+          "motion_max": 17.345510482788086
+        },
+        "ground_truth": "speaker view"
+      },
+      {
+        "time": 100.0,
+        "metrics": {
+          "brightness": 89.08635068817689,
+          "brightness_variation": 46.83999689122527,
+          "is_transition": "False",
+          "edge_density": 0.008120863417569193,
+          "center_brightness": 120.32645344464501,
+          "center_variation": 48.014525820902584,
+          "text_line_density": 0.0014426331227436822,
+          "face_ratio": 0.04517336040914561,
+          "face_count": 1,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 0.2666439712047577,
+          "motion_std": 0.4773356020450592,
+          "motion_max": 2.867359161376953
+        },
+        "ground_truth": "speaker view"
+      },
+      {
+        "time": 110.0,
+        "metrics": {
+          "brightness": 48.12415294073406,
+          "brightness_variation": 47.28594070833481,
+          "is_transition": "False",
+          "edge_density": 0.011830155685920577,
+          "center_brightness": 63.60426632069795,
+          "center_variation": 53.75269614665826,
+          "text_line_density": 0.002137861010830325,
+          "face_ratio": 0.0,
+          "face_count": 0,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 4.1591010093688965,
+          "motion_std": 5.0047502517700195,
+          "motion_max": 41.823944091796875
+        },
+        "ground_truth": "slides"
+      },
+      {
+        "time": 120.0,
+        "metrics": {
+          "brightness": 48.00297551895307,
+          "brightness_variation": 47.01995675939431,
+          "is_transition": "False",
+          "edge_density": 0.011193686070998797,
+          "center_brightness": 63.372580099277975,
+          "center_variation": 53.49499156858904,
+          "text_line_density": 0.002138801143200963,
+          "face_ratio": 0.0,
+          "face_count": 0,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 0.12570373713970184,
+          "motion_std": 0.38939186930656433,
+          "motion_max": 4.517276763916016
+        },
+        "ground_truth": "slides"
+      },
+      {
+        "time": 130.0,
+        "metrics": {
+          "brightness": 48.116577824157645,
+          "brightness_variation": 47.2735171814254,
+          "is_transition": "False",
+          "edge_density": 0.012078820697954271,
+          "center_brightness": 63.373225030084235,
+          "center_variation": 53.63319540523908,
+          "text_line_density": 0.002242685770156438,
+          "face_ratio": 0.0,
+          "face_count": 0,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 0.07160752266645432,
+          "motion_std": 0.32615113258361816,
+          "motion_max": 4.449299335479736
+        },
+        "ground_truth": "slides"
+      },
+      {
+        "time": 140.0,
+        "metrics": {
+          "brightness": 89.02316815207581,
+          "brightness_variation": 46.79106555294011,
+          "is_transition": "False",
+          "edge_density": 0.007288846269554753,
+          "center_brightness": 118.87972510529482,
+          "center_variation": 49.01017335142846,
+          "text_line_density": 0.0014233604091456076,
+          "face_ratio": 0.048738342358604095,
+          "face_count": 1,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 5.393686294555664,
+          "motion_std": 6.516947269439697,
+          "motion_max": 36.68193817138672
+        },
+        "ground_truth": "speaker view"
+      },
+      {
+        "time": 150.0,
+        "metrics": {
+          "brightness": 189.4930331490674,
+          "brightness_variation": 109.85990357025786,
+          "is_transition": "False",
+          "edge_density": 0.0035992967809867628,
+          "center_brightness": 254.9917870036101,
+          "center_variation": 0.32653105310178115,
+          "text_line_density": 0.0016217283393501806,
+          "face_ratio": 0.0,
+          "face_count": 0,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 13.26349925994873,
+          "motion_std": 21.754058837890625,
+          "motion_max": 262.4438781738281
+        },
+        "ground_truth": "whiteboard"
+      },
+      {
+        "time": 160.0,
+        "metrics": {
+          "brightness": 188.02268304377256,
+          "brightness_variation": 110.4200054024953,
+          "is_transition": "False",
+          "edge_density": 0.01010078219013237,
+          "center_brightness": 250.85824684115522,
+          "center_variation": 29.430816572166883,
+          "text_line_density": 0.002330588146811071,
+          "face_ratio": 0.0,
+          "face_count": 0,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 0.5417963862419128,
+          "motion_std": 1.0588051080703735,
+          "motion_max": 8.650083541870117
+        },
+        "ground_truth": "whiteboard"
+      },
+      {
+        "time": 170.0,
+        "metrics": {
+          "brightness": 187.9073579459988,
+          "brightness_variation": 110.36670587855454,
+          "is_transition": "False",
+          "edge_density": 0.010221119133574007,
+          "center_brightness": 250.85031776474128,
+          "center_variation": 29.49814062237321,
+          "text_line_density": 0.0023545615222623347,
+          "face_ratio": 0.0,
+          "face_count": 0,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 0.013573546893894672,
+          "motion_std": 0.06061317026615143,
+          "motion_max": 0.9919058680534363
+        },
+        "ground_truth": "whiteboard"
+      },
+      {
+        "time": 180.0,
+        "metrics": {
+          "brightness": 187.88012842208184,
+          "brightness_variation": 110.37565455920435,
+          "is_transition": "False",
+          "edge_density": 0.010288808664259928,
+          "center_brightness": 250.797630866426,
+          "center_variation": 29.81355980132864,
+          "text_line_density": 0.0023738342358604093,
+          "face_ratio": 0.0,
+          "face_count": 0,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 0.03118782490491867,
+          "motion_std": 0.16838856041431427,
+          "motion_max": 3.7106375694274902
+        },
+        "ground_truth": "whiteboard"
+      },
+      {
+        "time": 190.0,
+        "metrics": {
+          "brightness": 81.77775176744886,
+          "brightness_variation": 45.15063272126393,
+          "is_transition": "False",
+          "edge_density": 0.008313120487364621,
+          "center_brightness": 109.87479129061371,
+          "center_variation": 50.05262643415019,
+          "text_line_density": 0.0014069080926594464,
+          "face_ratio": 0.05338494660048135,
+          "face_count": 1,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 14.751908302307129,
+          "motion_std": 23.98328971862793,
+          "motion_max": 227.85610961914062
+        },
+        "ground_truth": "speaker view"
+      },
+      {
+        "time": 200.0,
+        "metrics": {
+          "brightness": 88.34379371615523,
+          "brightness_variation": 46.82136895636083,
+          "is_transition": "False",
+          "edge_density": 0.0076428061070998796,
+          "center_brightness": 119.03777451865223,
+          "center_variation": 48.701368356181135,
+          "text_line_density": 0.0015187838447653429,
+          "face_ratio": 0.04693892900120337,
+          "face_count": 1,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 1.3290610313415527,
+          "motion_std": 2.8817577362060547,
+          "motion_max": 17.14159393310547
+        },
+        "ground_truth": "speaker view"
+      },
+      {
+        "time": 210.0,
+        "metrics": {
+          "brightness": 88.85413141170277,
+          "brightness_variation": 46.79557909688736,
+          "is_transition": "False",
+          "edge_density": 0.007771134175691937,
+          "center_brightness": 119.31534108002407,
+          "center_variation": 48.28883284120984,
+          "text_line_density": 0.0015201940433212996,
+          "face_ratio": 0.04488238944043321,
+          "face_count": 1,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 0.5172094702720642,
+          "motion_std": 0.9785801768302917,
+          "motion_max": 4.714779853820801
+        },
+        "ground_truth": "speaker view"
+      },
+      {
+        "time": 220.0,
+        "metrics": {
+          "brightness": 88.84317228865824,
+          "brightness_variation": 46.957915319061236,
+          "is_transition": "False",
+          "edge_density": 0.008589989470517449,
+          "center_brightness": 119.74614921780987,
+          "center_variation": 48.65768215353201,
+          "text_line_density": 0.0013669524669073405,
+          "face_ratio": 0.043441636582430804,
+          "face_count": 1,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 0.274850457906723,
+          "motion_std": 0.4763455390930176,
+          "motion_max": 3.034013271331787
+        },
+        "ground_truth": "speaker view"
+      },
+      {
+        "time": 230.0,
+        "metrics": {
+          "brightness": 198.15025712620337,
+          "brightness_variation": 89.98632095674078,
+          "is_transition": "False",
+          "edge_density": 0.026262597773766546,
+          "center_brightness": 252.22614884175692,
+          "center_variation": 8.010006263328147,
+          "text_line_density": 0.011676914109506619,
+          "face_ratio": 0.0,
+          "face_count": 0,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 7.46134614944458,
+          "motion_std": 10.133198738098145,
+          "motion_max": 83.67828369140625
+        },
+        "ground_truth": "slides"
+      },
+      {
+        "time": 240.0,
+        "metrics": {
+          "brightness": 104.4522281137184,
+          "brightness_variation": 91.9498492327006,
+          "is_transition": "False",
+          "edge_density": 0.023811202617328518,
+          "center_brightness": 57.48496540312876,
+          "center_variation": 50.805063844345725,
+          "text_line_density": 0.0065818667268351385,
+          "face_ratio": 0.0,
+          "face_count": 0,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 31.19198989868164,
+          "motion_std": 34.719512939453125,
+          "motion_max": 573.9442138671875
+        },
+        "ground_truth": "slides"
+      },
+      {
+        "time": 250.0,
+        "metrics": {
+          "brightness": 180.9461416967509,
+          "brightness_variation": 94.97416166631052,
+          "is_transition": "False",
+          "edge_density": 0.052745656588447654,
+          "center_brightness": 238.32976271058965,
+          "center_variation": 21.741124674617907,
+          "text_line_density": 0.002980219614921781,
+          "face_ratio": 0.0,
+          "face_count": 0,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 11.572197914123535,
+          "motion_std": 9.334465980529785,
+          "motion_max": 184.95574951171875
+        },
+        "ground_truth": "screen sharing"
+      },
+      {
+        "time": 260.0,
+        "metrics": {
+          "brightness": 175.05608876729843,
+          "brightness_variation": 99.16525477316603,
+          "is_transition": "False",
+          "edge_density": 0.0500075210589651,
+          "center_brightness": 200.88710514440433,
+          "center_variation": 73.93445321621674,
+          "text_line_density": 0.003190809265944645,
+          "face_ratio": 0.0,
+          "face_count": 0,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 2.8595871925354004,
+          "motion_std": 3.175119400024414,
+          "motion_max": 25.486358642578125
+        },
+        "ground_truth": "screen sharing"
+      },
+      {
+        "time": 270.0,
+        "metrics": {
+          "brightness": 88.02085636657641,
+          "brightness_variation": 46.52082519063542,
+          "is_transition": "False",
+          "edge_density": 0.008439568291215404,
+          "center_brightness": 118.25112251805054,
+          "center_variation": 48.755502247225834,
+          "text_line_density": 0.0015065621239470518,
+          "face_ratio": 0.042588466456077015,
+          "face_count": 1,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 9.037406921386719,
+          "motion_std": 9.762382507324219,
+          "motion_max": 82.33224487304688
+        },
+        "ground_truth": "speaker view"
+      },
+      {
+        "time": 280.0,
+        "metrics": {
+          "brightness": 89.25803437123948,
+          "brightness_variation": 47.2646701977709,
+          "is_transition": "False",
+          "edge_density": 0.008460251203369434,
+          "center_brightness": 119.3291817087846,
+          "center_variation": 49.318630130413275,
+          "text_line_density": 0.0013349879663056559,
+          "face_ratio": 0.04287191636582431,
+          "face_count": 1,
+          "ocr_score": 0.0,
+          "avg_text_size": 0.0,
+          "text_size_std": 0.0,
+          "max_text_size": 0.0,
+          "min_text_size": 0.0,
+          "text_confidence": 0.0,
+          "motion_magnitude": 0.2867583632469177,
+          "motion_std": 0.5429262518882751,
+          "motion_max": 3.5319864749908447
+        },
+        "ground_truth": "speaker view"
+      }
+    ],
+    "ground_truth": [
+      {
+        "time": 0,
+        "content_type": "speaker view"
+      },
+      {
+        "time": 12,
+        "content_type": "screen sharing"
+      },
+      {
+        "time": 76,
+        "content_type": "speaker view"
+      },
+      {
+        "time": 102,
+        "content_type": "screen sharing"
+      },
+      {
+        "time": 109,
+        "content_type": "slides"
+      },
+      {
+        "time": 131,
+        "content_type": "speaker view"
+      },
+      {
+        "time": 144,
+        "content_type": "slides"
+      },
+      {
+        "time": 148,
+        "content_type": "whiteboard"
+      },
+      {
+        "time": 188,
+        "content_type": "speaker view"
+      },
+      {
+        "time": 221,
+        "content_type": "whiteboard"
+      },
+      {
+        "time": 225,
+        "content_type": "slides"
+      },
+      {
+        "time": 245,
+        "content_type": "screen sharing"
+      },
+      {
+        "time": 264,
+        "content_type": "speaker view"
+      }
+    ]
+  }
+}

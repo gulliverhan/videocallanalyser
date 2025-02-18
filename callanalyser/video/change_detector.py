@@ -29,7 +29,8 @@ class ChangeDetector:
                  min_change_threshold: float = 30.0,  # Minimum difference to consider a change
                  window_size: int = 5,               # Number of frames to look at around potential change
                  low_res_width: int = 320,          # Width for initial low-res scanning
-                 low_res_height: int = 180):        # Height for initial low-res scanning
+                 low_res_height: int = 180,         # Height for initial low-res scanning
+                 sample_interval: float = 10.0):     # Sample interval in seconds
         """
         Initialize the change detector.
         
@@ -38,11 +39,13 @@ class ChangeDetector:
             window_size: Number of frames to look at around potential change
             low_res_width: Width for initial low-res scanning
             low_res_height: Height for initial low-res scanning
+            sample_interval: Sample interval in seconds
         """
         self.min_change_threshold = min_change_threshold
         self.window_size = window_size
         self.low_res_width = low_res_width
         self.low_res_height = low_res_height
+        self.sample_interval = sample_interval
         
     def _compute_frame_difference(self, frame1: np.ndarray, frame2: np.ndarray) -> float:
         """
@@ -111,10 +114,10 @@ class ChangeDetector:
         confidence = min(ratio_before, ratio_after) * (current_diff / 100.0)
         
         return is_change, confidence
-    
+
     def detect_changes(self, video_path: str, min_confidence: float = 0.5) -> Generator[SceneChange, None, None]:
         """
-        Detect scene changes in a video file.
+        Detect scene changes in a video file using the specified interval sampling.
         
         Args:
             video_path: Path to video file
@@ -129,84 +132,98 @@ class ChangeDetector:
             
         fps = cap.get(cv2.CAP_PROP_FPS)
         frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+        duration = frame_count / fps
         
         logger.info(f"Processing video with {frame_count} frames at {fps} FPS")
+        logger.info(f"Video duration: {duration:.1f} seconds")
         
-        # Process video in chunks to save memory
-        chunk_size = 1000  # Process 1000 frames at a time
-        differences = []
-        frames = []  # Store only current chunk of frames
+        # Use sample_interval from initialization
+        base_interval = int(fps * self.sample_interval)  # Convert seconds to frames
+        logger.info(f"Sampling interval: {base_interval} frames ({self.sample_interval:.1f} seconds)")
+        
+        current_frame_idx = 0
         
         ret, prev_frame = cap.read()
         if not ret:
             cap.release()
             return
             
+        # Log initial progress
+        logger.info(f"Starting analysis at frame 0/{frame_count} (0.0%)")
+            
         # Resize for efficiency
         prev_frame_small = cv2.resize(prev_frame, (self.low_res_width, self.low_res_height))
-        frames.append(prev_frame)
         
-        frame_idx = 0
-        chunk_start_idx = 0
-        
-        while True:
+        while current_frame_idx < frame_count:
+            # Log progress more frequently (every 250 frames)
+            if current_frame_idx % 250 == 0:
+                logger.info(f"Processed {current_frame_idx}/{frame_count} frames ({current_frame_idx/frame_count*100:.1f}%)")
+            
+            # Skip frames according to interval
+            for _ in range(base_interval - 1):
+                ret = cap.grab()  # Just grab frame without decoding
+                if not ret:
+                    break
+                current_frame_idx += 1
+            
+            # Read the next frame to analyze
             ret, current_frame = cap.read()
             if not ret:
                 break
                 
-            # Store frame
-            frames.append(current_frame)
+            current_frame_idx += 1
             
             # Compute difference on low-res version
             current_frame_small = cv2.resize(current_frame, (self.low_res_width, self.low_res_height))
             diff = self._compute_frame_difference(prev_frame_small, current_frame_small)
-            differences.append(diff)
             
-            prev_frame_small = current_frame_small
-            frame_idx += 1
-            
-            # Log progress
-            if frame_idx % 100 == 0:
-                logger.info(f"Processed {frame_idx}/{frame_count} frames ({frame_idx/frame_count*100:.1f}%)")
-            
-            # Process chunk if we've collected enough frames
-            if len(frames) >= chunk_size or not ret:
-                # Detect significant changes in current chunk
-                for i in range(len(differences)):
-                    chunk_idx = chunk_start_idx + i
-                    if chunk_idx < self.window_size or chunk_idx >= frame_count - self.window_size:
-                        continue
-                        
-                    is_change, confidence = self._is_significant_change(differences, i)
+            # If significant difference detected, do a brief burst of more frequent sampling
+            if diff > self.min_change_threshold:
+                # Store the frames where we detected the change
+                frame_before = prev_frame
+                frame_after = current_frame
+                timestamp = current_frame_idx / fps
+                
+                # Sample a few more frames at 1-second intervals to catch any immediate follow-up changes
+                burst_interval = int(fps)  # 1 second
+                for _ in range(3):  # Check next 3 seconds
+                    # Skip to next sample point
+                    for _ in range(burst_interval - 1):
+                        ret = cap.grab()
+                        if not ret:
+                            break
+                        current_frame_idx += 1
                     
-                    if is_change and confidence >= min_confidence:
-                        # Get timestamp
-                        timestamp = chunk_idx / fps
-                        
-                        # Get frames before and after change
-                        frame_before = frames[i]
-                        frame_after = frames[i + 1] if i + 1 < len(frames) else None
-                        
-                        if frame_after is not None:
-                            yield SceneChange(
-                                timestamp=timestamp,
-                                confidence=confidence,
-                                frame_before=frame_before,
-                                frame_after=frame_after
-                            )
+                    ret, burst_frame = cap.read()
+                    if not ret:
+                        break
+                    
+                    current_frame_idx += 1
+                    burst_frame_small = cv2.resize(burst_frame, (self.low_res_width, self.low_res_height))
+                    burst_diff = self._compute_frame_difference(current_frame_small, burst_frame_small)
+                    
+                    # If we detect another significant change, yield it too
+                    if burst_diff > self.min_change_threshold:
+                        yield SceneChange(
+                            timestamp=current_frame_idx / fps,
+                            confidence=burst_diff / 100.0,
+                            frame_before=current_frame,
+                            frame_after=burst_frame
+                        )
+                    
+                    current_frame = burst_frame
+                    current_frame_small = burst_frame_small
                 
-                # Keep only the last frame for next chunk
-                last_frame = frames[-1]
-                frames.clear()
-                frames.append(last_frame)
-                
-                # Keep only the last few differences for window comparison
-                last_diffs = differences[-self.window_size:] if len(differences) > self.window_size else differences[:]
-                differences.clear()
-                differences.extend(last_diffs)
-                
-                # Update chunk start index
-                chunk_start_idx = frame_idx - len(differences)
+                # Yield the original change
+                yield SceneChange(
+                    timestamp=timestamp,
+                    confidence=diff / 100.0,
+                    frame_before=frame_before,
+                    frame_after=frame_after
+                )
+            
+            prev_frame = current_frame
+            prev_frame_small = current_frame_small
         
         cap.release()
         logger.info("Completed change detection") 

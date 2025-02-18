@@ -1,0 +1,360 @@
+Call Timeline Summary - call_activity_types
+=========================================
+
+00:00 - 00:05: Interactive (5.0s, confidence: 0.80)
+  Key metrics:
+    brightness: 73.155
+    brightness_variation: 38.693
+    is_transition: 0.000
+    edge_density: 0.006
+    center_brightness: 96.497
+    center_variation: 41.102
+    text_line_density: 0.001
+    face_ratio: 0.039
+    face_count: 0.833
+    ocr_score: 0.000
+    avg_text_size: 0.000
+    text_size_std: 0.000
+    max_text_size: 0.000
+    min_text_size: 0.000
+    text_confidence: 0.000
+    motion_magnitude: 1.095
+    motion_std: 1.881
+    motion_max: 10.405
+
+00:05 - 00:13: Speaker (8.0s, confidence: 0.80)
+  Key metrics:
+    brightness: 76.349
+    brightness_variation: 42.806
+    is_transition: 0.000
+    edge_density: 0.007
+    center_brightness: 101.946
+    center_variation: 43.352
+    text_line_density: 0.001
+    face_ratio: 0.039
+    face_count: 0.875
+    ocr_score: 0.000
+    avg_text_size: 0.000
+    text_size_std: 0.000
+    max_text_size: 0.000
+    min_text_size: 0.000
+    text_confidence: 0.000
+    motion_magnitude: 0.693
+    motion_std: 1.200
+    motion_max: 9.461
+
+00:13 - 00:31: Interactive (18.0s, confidence: 0.70)
+  Key metrics:
+    brightness: 116.489
+    brightness_variation: 71.000
+    is_transition: 0.000
+    edge_density: 0.045
+    center_brightness: 139.136
+    center_variation: 29.875
+    text_line_density: 0.002
+    face_ratio: 0.002
+    face_count: 0.278
+    ocr_score: 0.000
+    avg_text_size: 0.000
+    text_size_std: 0.000
+    max_text_size: 0.000
+    min_text_size: 0.000
+    text_confidence: 0.000
+    motion_magnitude: 1.596
+    motion_std: 2.192
+    motion_max: 16.872
+
+00:31 - 00:36: Slide 2 (5.0s, confidence: 0.68)
+  Key metrics:
+    brightness: 160.289
+    brightness_variation: 90.332
+    is_transition: 0.000
+    edge_density: 0.039
+    center_brightness: 196.498
+    center_variation: 33.025
+    text_line_density: 0.003
+    face_ratio: 0.000
+    face_count: 0.000
+    ocr_score: 0.000
+    avg_text_size: 0.000
+    text_size_std: 0.000
+    max_text_size: 0.000
+    min_text_size: 0.000
+    text_confidence: 0.000
+    motion_magnitude: 2.667
+    motion_std: 4.350
+    motion_max: 28.624
+
+00:36 - 01:17: Interactive (41.0s, confidence: 0.60)
+  Key metrics:
+    brightness: 171.046
+    brightness_variation: 88.668
+    is_transition: 0.000
+    edge_density: 0.045
+    center_brightness: 219.892
+    center_variation: 28.961
+    text_line_density: 0.004
+    face_ratio: 0.001
+    face_count: 0.024
+    ocr_score: 0.000
+    avg_text_size: 0.000
+    text_size_std: 0.000
+    max_text_size: 0.000
+    min_text_size: 0.000
+    text_confidence: 0.000
+    motion_magnitude: 1.655
+    motion_std: 2.947
+    motion_max: 32.600
+
+01:17 - 01:25: Speaker (8.0s, confidence: 0.80)
+  Key metrics:
+    brightness: 88.502
+    brightness_variation: 47.009
+    is_transition: 0.000
+    edge_density: 0.007
+    center_brightness: 118.875
+    center_variation: 49.593
+    text_line_density: 0.001
+    face_ratio: 0.046
+    face_count: 1.125
+    ocr_score: 0.000
+    avg_text_size: 0.000
+    text_size_std: 0.000
+    max_text_size: 0.000
+    min_text_size: 0.000
+    text_confidence: 0.000
+    motion_magnitude: 0.936
+    motion_std: 1.959
+    motion_max: 10.605
+
+01:25 - 01:30: Interactive (5.0s, confidence: 0.78)
+  Key metrics:
+    brightness: 89.157
+    brightness_variation: 47.066
+    is_transition: 0.000
+    edge_density: 0.008
+    center_brightness: 121.511
+    center_variation: 48.188
+    text_line_density: 0.001
+    face_ratio: 0.046
+    face_count: 1.000
+    ocr_score: 0.000
+    avg_text_size: 0.000
+    text_size_std: 0.000
+    max_text_size: 0.000
+    min_text_size: 0.000
+    text_confidence: 0.000
+    motion_magnitude: 0.388
+    motion_std: 0.941
+    motion_max: 6.566
+
+01:30 - 01:42: Speaker (12.0s, confidence: 0.80)
+  Key metrics:
+    brightness: 97.029
+    brightness_variation: 50.758
+    is_transition: 0.000
+    edge_density: 0.012
+    center_brightness: 130.657
+    center_variation: 45.569
+    text_line_density: 0.002
+    face_ratio: 0.050
+    face_count: 1.250
+    ocr_score: 0.000
+    avg_text_size: 0.000
+    text_size_std: 0.000
+    max_text_size: 0.000
+    min_text_size: 0.000
+    text_confidence: 0.000
+    motion_magnitude: 0.615
+    motion_std: 0.655
+    motion_max: 5.199
+
+01:42 - 01:50: Interactive (8.0s, confidence: 0.76)
+  Key metrics:
+    brightness: 85.927
+    brightness_variation: 65.656
+    is_transition: 0.000
+    edge_density: 0.055
+    center_brightness: 104.095
+    center_variation: 55.645
+    text_line_density: 0.002
+    face_ratio: 0.003
+    face_count: 0.500
+    ocr_score: 0.000
+    avg_text_size: 0.000
+    text_size_std: 0.000
+    max_text_size: 0.000
+    min_text_size: 0.000
+    text_confidence: 0.000
+    motion_magnitude: 4.872
+    motion_std: 4.058
+    motion_max: 42.174
+
+01:50 - 01:55: Slide 2 (5.0s, confidence: 0.90)
+  Key metrics:
+    brightness: 100.984
+    brightness_variation: 71.442
+    is_transition: 0.000
+    edge_density: 0.010
+    center_brightness: 139.354
+    center_variation: 33.126
+    text_line_density: 0.003
+    face_ratio: 0.000
+    face_count: 0.000
+    ocr_score: 0.000
+    avg_text_size: 0.000
+    text_size_std: 0.000
+    max_text_size: 0.000
+    min_text_size: 0.000
+    text_confidence: 0.000
+    motion_magnitude: 4.259
+    motion_std: 6.482
+    motion_max: 38.740
+
+01:55 - 02:01: Interactive (6.0s, confidence: 0.75)
+  Key metrics:
+    brightness: 136.151
+    brightness_variation: 87.473
+    is_transition: 0.000
+    edge_density: 0.008
+    center_brightness: 189.774
+    center_variation: 18.911
+    text_line_density: 0.003
+    face_ratio: 0.000
+    face_count: 0.000
+    ocr_score: 0.000
+    avg_text_size: 0.000
+    text_size_std: 0.000
+    max_text_size: 0.000
+    min_text_size: 0.000
+    text_confidence: 0.000
+    motion_magnitude: 3.347
+    motion_std: 5.705
+    motion_max: 31.621
+
+02:01 - 02:12: Slide 2 (11.0s, confidence: 1.00)
+  Key metrics:
+    brightness: 51.838
+    brightness_variation: 47.177
+    is_transition: 0.000
+    edge_density: 0.011
+    center_brightness: 68.496
+    center_variation: 53.217
+    text_line_density: 0.002
+    face_ratio: 0.004
+    face_count: 0.091
+    ocr_score: 0.000
+    avg_text_size: 0.000
+    text_size_std: 0.000
+    max_text_size: 0.000
+    min_text_size: 0.000
+    text_confidence: 0.000
+    motion_magnitude: 0.497
+    motion_std: 0.704
+    motion_max: 5.222
+
+02:12 - 02:24: Speaker (12.0s, confidence: 0.80)
+  Key metrics:
+    brightness: 85.635
+    brightness_variation: 46.899
+    is_transition: 0.000
+    edge_density: 0.007
+    center_brightness: 114.114
+    center_variation: 49.690
+    text_line_density: 0.002
+    face_ratio: 0.043
+    face_count: 0.917
+    ocr_score: 0.000
+    avg_text_size: 0.000
+    text_size_std: 0.000
+    max_text_size: 0.000
+    min_text_size: 0.000
+    text_confidence: 0.000
+    motion_magnitude: 0.845
+    motion_std: 1.537
+    motion_max: 9.485
+
+02:24 - 03:10: Interactive (46.0s, confidence: 0.60)
+  Key metrics:
+    brightness: 176.754
+    brightness_variation: 104.752
+    is_transition: 0.000
+    edge_density: 0.009
+    center_brightness: 236.291
+    center_variation: 26.990
+    text_line_density: 0.002
+    face_ratio: 0.001
+    face_count: 0.022
+    ocr_score: 0.000
+    avg_text_size: 0.000
+    text_size_std: 0.000
+    max_text_size: 0.000
+    min_text_size: 0.000
+    text_confidence: 0.000
+    motion_magnitude: 0.961
+    motion_std: 1.928
+    motion_max: 14.642
+
+03:10 - 03:41: Speaker (31.0s, confidence: 0.80)
+  Key metrics:
+    brightness: 91.470
+    brightness_variation: 48.768
+    is_transition: 0.000
+    edge_density: 0.008
+    center_brightness: 122.940
+    center_variation: 48.163
+    text_line_density: 0.002
+    face_ratio: 0.047
+    face_count: 1.065
+    ocr_score: 0.000
+    avg_text_size: 0.000
+    text_size_std: 0.000
+    max_text_size: 0.000
+    min_text_size: 0.000
+    text_confidence: 0.000
+    motion_magnitude: 0.901
+    motion_std: 1.641
+    motion_max: 11.569
+
+03:41 - 04:25: Interactive (44.0s, confidence: 0.51)
+  Key metrics:
+    brightness: 146.595
+    brightness_variation: 90.898
+    is_transition: 0.000
+    edge_density: 0.039
+    center_brightness: 160.323
+    center_variation: 39.445
+    text_line_density: 0.006
+    face_ratio: 0.002
+    face_count: 0.273
+    ocr_score: 0.000
+    avg_text_size: 0.000
+    text_size_std: 0.000
+    max_text_size: 0.000
+    min_text_size: 0.000
+    text_confidence: 0.000
+    motion_magnitude: 5.079
+    motion_std: 6.057
+    motion_max: 36.951
+
+04:25 - 04:40: Speaker (15.0s, confidence: 0.80)
+  Key metrics:
+    brightness: 88.839
+    brightness_variation: 46.885
+    is_transition: 0.000
+    edge_density: 0.008
+    center_brightness: 119.232
+    center_variation: 48.778
+    text_line_density: 0.001
+    face_ratio: 0.044
+    face_count: 1.000
+    ocr_score: 0.000
+    avg_text_size: 0.000
+    text_size_std: 0.000
+    max_text_size: 0.000
+    min_text_size: 0.000
+    text_confidence: 0.000
+    motion_magnitude: 0.474
+    motion_std: 0.957
+    motion_max: 5.298
+

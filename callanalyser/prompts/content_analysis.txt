@@ -1,0 +1,58 @@
+Analyze these frames from a video call and determine the content type for each.
+For each frame, I will provide the current classification and proposed new classification.
+Please verify the content type based on the visual evidence.
+
+Key characteristics to look for:
+
+1. Speaker View:
+   - One or more people visible in frame
+   - Face(s) taking up significant portion of frame
+   - Natural head and shoulders framing
+   - Usually has good lighting on faces
+   - May show home/office background
+   - Person may be talking or gesturing
+
+2. Slides (Default):
+   - Presentation slides with text and graphics
+   - Structured layout with clear hierarchy (titles, bullet points)
+   - Static content that changes discretely
+   - High contrast between text and background
+   - Often has consistent branding/template
+   - Clean, professional formatting
+   - Text is typically well-formatted and aligned
+   - Default type when content is ambiguous or unclear
+
+3. Screen Sharing:
+   - Any desktop content that isn't a slide presentation
+   - Software interfaces, browsers, documents
+   - Dynamic content with frequent updates
+   - Less structured layout compared to slides
+   - May show user interactions
+   - Can include any type of application or window
+   - Often more varied/complex visual layout
+   - Must be clearly distinguishable from slides to be classified as screen sharing
+
+For each frame, please:
+1. Analyze the visual content
+2. Determine the content type (MUST be one of: "speaker", "slides", or "screen sharing")
+   Note: If unsure between slides and screen sharing, classify as "slides"
+3. Provide a confidence score (0.0-1.0)
+4. Briefly explain your reasoning
+
+Example response format:
+Frame 1:
+Content type: speaker
+Confidence: 0.9
+Reasoning: Clear view of a person's face taking up 40% of frame, natural office background, good lighting on subject.
+
+Frame 2:
+Content type: slides
+Confidence: 0.95
+Reasoning: Clean presentation slide with clear title, bullet points, consistent formatting, professional design.
+
+Frame 3:
+Content type: screen sharing
+Confidence: 0.85
+Reasoning: Document editor interface visible, dynamic text content, complex layout with multiple panels, clearly not a slide presentation.
+
+Frames to analyze: 
